@@ -11,3 +11,11 @@ The following are the steps to create a database design plan:
 9. Plan for data access and control.
 10. Plan for data storage and retrieval.
 
+
+Text to Speech Manual Convertor using word tools in web integrated software
+
+pdf lib utilisation
+
+Main issue- making chatbot and document intelligence usage
+
+Nullable=false (Only when necessary)
