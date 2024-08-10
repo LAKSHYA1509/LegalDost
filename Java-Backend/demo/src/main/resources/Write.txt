@@ -1,0 +1,13 @@
+Entity and models are related to database configuration and therefore a perfect plan is necessary that lays out plan for entire software and can be mostly used for dbms management.
+The following are the steps to create a database design plan:
+1. Define the purpose and scope of the database.
+2. Identify the stakeholders and their requirements.
+3. Determine the data entities and their relationships.
+4. Choose a database management system (DBMS).
+5. Design the database schema.
+6. Plan for data security and integrity.
+7. Plan for data backup and recovery.
+8. Plan for data maintenance and updates.
+9. Plan for data access and control.
+10. Plan for data storage and retrieval.
+
