@@ -19,3 +19,27 @@ pdf lib utilisation
 Main issue- making chatbot and document intelligence usage
 
 Nullable=false (Only when necessary)
+
+
+Login Page Created that is extremely beautiful
+
+Today task is to connect to database for signup.
+
+Chatbot looking options
+
+Document intelligence api lookup
+
+Login process
+
+Why we make Service class?
+Service class is used to encapsulate the business logic of an application. It acts as an interface between the presentation layer and the data access layer. The service class is responsible for performing complex operations, such as data validation, business rules, and data manipulation.
+--> Optional in UserService used to?
+Ans- The Optional class is often used to handle situations where a user object may or may not be present. This could be due to various reasons such as the user not being found in the database, or theuser not being authenticated.
+
+
+Don't make yourself fool to SQL DATABASE...
+problem was not in post or authenticate but actually problem same data ki re-entry thi.
+New Data se login hota hai
+Ya to new data banao and usse kaam karo
+purana signup karne se database conflict hota hai
+That's why always make new data only
