@@ -1,0 +1,10 @@
+
+1. Principal's Full Name [Your Full Name]
+2. Principal's Address [Your Address]
+3. Attorney's Full Name [Attorney's Full Name]
+4. Attorney's Address [Attorney's Address]
+5. Date of Execution [Day] of [Month], [Year]
+6. Witness’s Full Name [Witness’s Full Name]
+7. Witness’s Address [Witness’s Address]
+8. Principal's Signature [Your Signature]
+9. Witness’s Signature [Witness’s Signature]

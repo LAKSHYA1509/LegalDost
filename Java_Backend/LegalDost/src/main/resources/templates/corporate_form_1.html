@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
+    <link rel="stylesheet"
+        href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="/richtexteditor/rte_theme_default.css" />
+        <script src="https://cdn.tiny.cloud/1/u65axcwtx493dj0cwdv36rcbeph1vy69u598lk9po7pysmuv/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+<!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Load saved data from sessionStorage
+            const savedData = JSON.parse(sessionStorage.getItem('step2Data')) || {};
+    
+        // Log loaded data for debugging
+        console.log('Loaded Data:', savedData);
+        
+        // Set initial content in TinyMCE with the saved data
+        tinymce.init({
+            selector: '#editor',
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+            ],
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+            setup: function (editor) {
+                editor.on('init', function () {
+                    // Set initial content in TinyMCE
+                    editor.setContent(`
+                    <b> Draft of General Power of Attorney</b>
+                    <br>
+                    To All to Whom these presents shall come, I ${savedData.principleFullName || 'Not provided'} of ${savedData.principleAddress || 'Not provided'}
+                    WHEREAS, I am desirous of appointing some fit and proper person to look after all my immovable properties, business and other affairs and requested Mr. ${savedData.attorneyFullName || 'Not provided'} of ${savedData.attorneyAddress || 'Not provided'} (Hereinafter called 'the Attorney') to act for me and manage and look after my affairs which the Attorney has consented to do
+                    NOW KNOW YOU ALL AND THESE PRESENTS WITNESS that I, the said ${savedData.witnessFullName || 'Not provided'} do hereby appoint the said ${savedData.attorneyFullName || 'Not provided'} as my true and lawful Attorney with full power and authority to do and execute all acts, deeds, and things as hereinafter mentioned.
+                    <br>
+                    39. In general to do all other acts, deeds. Matters and things whatsoever in or about my estate, property and affairs or concur with persons jointly Interested with myself therein in doing all acts, deeds, matters and things herein either particularly or generally described as amply and effectually to all Intents and purpose as I could do in my own proper person if these presents had not been made.
+                    AND I, the abovenamed ${savedData.principleFullName || 'Not provided'} do hereby undertake to ratify whatever the Attorney or any substitute or agent appointed by him under the power In that behalf hereinbefore contained may lawfully do or cause to be done in and by virtue of these presents.
+                    IN WITNESS WHEREOF I, the abovenamed ${savedData.principleFullName || 'Not provided'} have hereunto set my hand this ${savedData.dateOfExecution || 'Not provided'} day of ${savedData.dateOfExecution || 'Not provided'}
+                    Signed, sealed and delivered by the withinnamed
+                    in the presence of ${savedData.witnessFullName || 'Not provided'}
+                     `);
+                });
+            }
+        });
+        
+        // Setup event listeners for saving data
+        document.getElementById('nextButton').addEventListener('click', saveStep2Data);
+    });
+    
+    // Function to save Step 2 data to sessionStorage
+    function saveStep2Data() {
+        const step2Data = {
+            principleFullName: document.getElementById('PrincipleFullName').value || 'Not provided',
+            principleAddress: document.getElementById('PrincipleAddress').value || 'Not provided',
+            attorneyFullName: document.getElementById('AttorneyFullName').value || 'Not provided',
+            attorneyAddress: document.getElementById('AttorneyAddress').value || 'Not provided',
+            witnessFullName: document.getElementById('WitnessFullName').value || 'Not provided',
+            witnessAddress: document.getElementById('WitnessAddress').value || 'Not provided',
+            dateOfExecution: document.getElementById('DateOfExecution').value || 'Not provided'
+        };
+        
+        sessionStorage.setItem('step2Data', JSON.stringify(step2Data));
+        console.log('Saved Data:', step2Data);
+    }
+    
+    // Function to load Step 2 data from sessionStorage
+    function loadStep2Data() {
+        const savedData = JSON.parse(sessionStorage.getItem('step2Data')) || {};
+        console.log('Loaded Data:', savedData);
+        
+        document.getElementById('PrincipleFullName').value = savedData.principleFullName || '';
+        document.getElementById('PrincipleAddress').value = savedData.principleAddress || '';
+        document.getElementById('AttorneyFullName').value = savedData.attorneyFullName || '';
+        document.getElementById('AttorneyAddress').value = savedData.attorneyAddress || '';
+        document.getElementById('WitnessFullName').value = savedData.witnessFullName || '';
+        document.getElementById('WitnessAddress').value = savedData.witnessAddress || '';
+        document.getElementById('DateOfExecution').value = savedData.dateOfExecution || '';
+    }
+    
+    </script>
+        <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <div class="heading p-3 text-4xl border-l-2 ">
+            <h1>GENERAL POWER OF ATTORNEY</h1>
+        </div>
+        <section class="py-1 bg-blueGray-50">
+            <div class="w-full lg:w-8/12 px-4 mx-auto mt-6">
+                <div
+                    class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
+                    <div class="rounded-t bg-white mb-0 px-6 py-6">
+                        <div class="flex">
+                            <!-- Stepper Section -->
+                            <div class="w-1/4 bg-white p-6">
+                                <div th:replace="~{form_nav.html :: stepper}"></div>
+                            </div>
+
+                            <!-- Form Section -->
+                            <div class="w-3/4 p-6">
+                                <!-- Step 1: Document Details -->
+                                <div id="step-1" class="step-content">
+                                    <h6 class="text-blueGray-700 text-xl font-bold mb-4">
+                                        Documents Needed for Power of Attorney
+                                    </h6>
+
+                                    <ul class="list-disc list-inside mb-4">
+                                        <span><strong>Prerequisites for registering Power of Attorney:</strong></span>
+                                        <li><strong>Draft of the POA</strong></li>
+                                        </span>Draft of the original written POA</span>
+                                        <li><strong>Identification Proof:</strong></li>
+                                        <span>Identity proof of the parties involved</span>
+                                        <li><strong>Proof of Property:</strong></li>
+                                        <span>Electricity bill or tax receipt (for property-related POA)</span>
+                                        <li><strong>Photograph:</strong></li>
+                                        <span>Passport size photograph of both parties</span>
+                                        <li><strong>Witnesses:</strong></li>
+                                        <span>2 witnesses along with their ID proofs (identity and address)</span>
+                                    </ul>
+                                    <div class="flex items-center mb-4">
+                                        <input type="checkbox" id="disclaimer" class="mr-2">
+                                        <label for="disclaimer" class="text-blueGray-600 text-sm">
+                                            You agree that LegalDost is not responsible for any wrongdoings in document
+                                            generation - WE DO NOT STORE ANY FORM DATA
+                                        </label>
+                                    </div>
+                                    <button type="submit"
+                                        class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4"
+                                        id="nextButton">
+                                        Next
+                                    </button>
+                                </div>
+
+                                <!-- Step 2: Form -->
+                                <div id="step-2" class="hidden">
+                                    <div class="text-center flex justify-between">
+                                        <h6 class="text-blueGray-700 text-xl font-bold">
+                                            General Power of Attorney (GPA)
+                                        </h6>
+                                    </div>
+                                    <!-- Form -->
+                                    <form id="step2-form" class="mt-5" novalidate>
+                                        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                                            Principle Information
+                                        </h6>
+                                        <div class="flex flex-wrap">
+                                            <div class="w-full lg:w-6/12 px-4">
+                                                <div class="relative w-full mb-3">
+                                                    <label
+                                                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                                                        Principle Full Name
+                                                    </label>
+                                                    <input type="text" name="principleFullName"
+                                                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                        id="PrincipleFullName" value="John Doe" placeholder="Enter username" required>
+                                                </div>
+                                            </div>
+                                            <div class="w-full lg:w-6/12 px-4">
+                                                <div class="relative w-full mb-3">
+                                                    <label
+                                                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                                                        Principle Address
+                                                    </label>
+                                                    <input type="text" name="principleAddress"
+                                                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                        id="PrincipleAddress" value="John Doe" placeholder="PrincipleAddress" required>
+                                                </div>
+                                            </div>
+                                            <div class="w-full lg:w-6/12 px-4">
+                                                <div class="relative w-full mb-3">
+                                                    <label
+                                                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                                                        Attorney Full Name
+                                                    </label>
+                                                    <input type="text" name="attorneyFullName"
+                                                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                        id="AttorneyFullName" value="John Doe" placeholder="First Name" required>
+                                                </div>
+                                            </div>
+                                            <div class="w-full lg:w-6/12 px-4">
+                                                <div class="relative w-full mb-3">
+                                                    <label
+                                                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                                                        Attorney Address
+                                                    </label>
+                                                    <input type="text" name="attorneyAddress"
+                                                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                        id="AttorneyAddress" value="John Doe" placeholder="AttorneyAddress" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr class="mt-6 border-b-1 border-blueGray-300">
+
+                                        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                                            Witness Information
+                                        </h6>
+                                        <div class="flex flex-wrap">
+                                            <div class="w-full lg:w-12/12 px-4">
+                                                <div class="relative w-full mb-3">
+                                                    <label
+                                                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                                                        Witness Full Name
+                                                    </label>
+                                                    <input type="text" name="witnessFullName"
+                                                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                        id="WitnessFullName" value="John Doe" placeholder="WitnessFullName" required>
+                                                </div>
+                                            </div>
+                                            <div class="w-full lg:w-4/12 px-4">
+                                                <div class="relative w-full mb-3">
+                                                    <label
+                                                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                                                        Witness Address
+                                                    </label>
+                                                    <input type="text" name="witnessAddress"
+                                                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                        id="WitnessAddress" value="John Doe" placeholder="address" required>
+                                                </div>
+                                            </div>
+                                            <div class="w-full lg:w-4/12 px-4">
+                                                <div class="relative w-full mb-3">
+                                                    <label
+                                                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                                                        Date of Execution
+                                                    </label>
+                                                    <input type="date" name="dateOfExecution"
+                                                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                        id="DateOfExecution" value="2024-08-17" placeholder="Date" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr class="mt-6 border-b-1 border-blueGray-300">
+                                        <div class="flex justify-between mt-4">
+                                            <button
+                                                class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                                id="prevButton">
+                                                Previous
+                                            </button>
+                                            <button type="submit"
+                                                class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                                id="submitButton">
+                                                Next
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="step-3" class="hidden">
+                                    <div class="text-left flex justify-left">
+                                        <h6 class="text-blueGray-700 text-xl font-bold">General Power of Attorney (GPA)
+                                        </h6>
+                                    </div>
+                                    <div id="review">
+                                        <div class="flex flex-col justify-left gap-6">
+                                            <h2>Please review the details and if any issue persists, go back to the
+                                                previous step and correct them.</h2>
+                                            <div class="w-full lg:w-6/12 px-4">
+                                                <label
+                                                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2">Principle
+                                                    Full Name:- &nbsp; &nbsp;<span class="gap-2"
+                                                        id="reviewPrincipleFullName"></label>
+                                            </div>
+                                            <div class="w-full lg:w-6/12 px-4">
+                                                <label
+                                                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2">Principle
+                                                    Address:- &nbsp; &nbsp;<span class="gap-2"
+                                                        id="reviewPrincipleAddress"></span></label>
+                                                <p id="reviewPrincipleAddress"></p>
+                                            </div>
+                                            <div class="w-full lg:w-6/12 px-4">
+                                                <label
+                                                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2">Attorney
+                                                    Full Name:- &nbsp; &nbsp;<span class="gap-2"
+                                                        id="reviewAttorneyFullName"></span></label>
+                                                <p id="reviewAttorneyFullName"></p>
+                                            </div>
+                                            <div class="w-full lg:w-6/12 px-4">
+                                                <label
+                                                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2">Attorney
+                                                    Address:- &nbsp; &nbsp;<span class="gap-2"
+                                                        id="reviewAttorneyAddress"></span></label>
+                                                <p id="reviewAttorneyAddress"></p>
+                                            </div>
+                                            <div class="w-full lg:w-6/12 px-4">
+                                                <label
+                                                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2">Witness
+                                                    Full Name:- &nbsp; &nbsp;<span class="gap-2"
+                                                        id="reviewWitnessFullName"></span></label>
+                                                <p id="reviewWitnessFullName"></p>
+                                            </div>
+                                            <div class="w-full lg:w-6/12 px-4">
+                                                <label
+                                                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2">Witness
+                                                    Address:- &nbsp; &nbsp;<span class="gap-2"
+                                                        id="reviewWitnessAddress"></span></label>
+                                                <p id="reviewWitnessAddress"></p>
+                                            </div>
+                                            <div class="w-full lg:w-6/12 px-4">
+                                                <label
+                                                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2">Date
+                                                    of Execution:- &nbsp; &nbsp;<span class="gap-2"
+                                                        id="reviewExecutionDate"></span></label>
+                                                <p id="reviewExecutionDate"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="mt-6 border-b-1 border-blueGray-300">
+                                    <div class="flex align-middle justify-between mt-4">
+                                        <button
+                                            class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                            id="prevButton1">
+                                            Previous
+                                        </button>
+                                        <button type="submit"
+                                            class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                            id="submitButton1">
+                                            Next
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                                <div id="step-4" class="hidden">
+                                    <div class="text-left flex justify-left">
+                                        <h6 class="text-blueGray-700 text-xl font-bold">General Power of Attorney (GPA)
+                                        </h6>
+                                    </div>
+                                    <div id="review">
+                                        <div class="flex flex-col justify-left gap-6">
+                                            <h2>Please review the details and if any issue persists, go back to the
+                                                previous step and correct them.
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <hr class="mt-6 border-b-1 border-blueGray-300">
+                                    <div class="flex align-middle justify-between mt-4">
+                                        <div id="editor">
+                                            <b> Draft of General Power of Attorney</b>
+                                            <br>
+                                            To All to Whom these presents shall come, I [PrincipleFullName] of [PrincipleAddress]
+                                            WHEREAS, I am desirous of appointing some fit and proper person to look after all my immovable properties, business and other affairs and requested Mr. [AttorneyFullName] of [AttorneyAddress] (Hereinafter called 'the Attorney') to act for me and manage and look after my affairs which the Attorney has consented to do
+                                            NOW KNOW YOU ALL AND THESE PRESENTS WITNESS that I, the said [WitnessFullName] do hereby appoint the said [AttorneyFullName] as my true and lawful Attorney with full power and authority to do and execute all acts, deeds, and things as hereinafter mentioned.
+                                            <br>
+                                            39. In general to do all other acts, deeds. Matters and things whatsoever in or about my estate, property and affairs or concur with persons jointly Interested with myself therein in doing all acts, deeds, matters and things herein either particularly or generally described as amply and effectually to all Intents and purpose as I could do in my own proper person if these presents had not been made.
+                                            AND I, the abovenamed [PrincipleFullName] do hereby undertake to ratify whatever the Attorney or any substitute or agent appointed by him under the power In that behalf hereinbefore contained may lawfully do or cause to be done in and by virtue of these presents.
+                                            IN WITNESS WHEREOF I, the abovenamed [PrincipleFullName] have hereunto set my hand this [AttorneyFullName] day of [DateOfExecution]
+                                            Signed, sealed and delivered by the withinnamed
+                                            in the presence of [WitnessFullName]
+                                        </div>
+                                    </div>
+                                    <div class="flex align-middle justify-between mt-4">
+                                        <button
+                                            class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                            id="prevButton2">
+                                            Previous
+                                        </button>
+                                        <button type="submit"
+                                            class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                            id="submitButton2">
+                                            Next
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+<script src="js/corporate1.js"></script>
+
+</html>
