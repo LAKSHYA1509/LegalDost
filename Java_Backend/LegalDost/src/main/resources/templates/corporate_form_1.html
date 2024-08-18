@@ -8,87 +8,12 @@
     <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
     <link rel="stylesheet"
         href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
-        <link rel="stylesheet" href="/richtexteditor/rte_theme_default.css" />
-        <script src="https://cdn.tiny.cloud/1/u65axcwtx493dj0cwdv36rcbeph1vy69u598lk9po7pysmuv/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <link rel="stylesheet" href="/richtexteditor/rte_theme_default.css" />
+    <script src="https://cdn.tiny.cloud/1/u65axcwtx493dj0cwdv36rcbeph1vy69u598lk9po7pysmuv/tinymce/7/tinymce.min.js"
+        referrerpolicy="origin"></script>
 
-<!-- Place the following <script> and <textarea> tags your HTML's <body> -->
-    <script>
 
-        document.addEventListener('DOMContentLoaded', function () {
-            // Load saved data from sessionStorage
-            const savedData = JSON.parse(sessionStorage.getItem('step2Data')) || {};
-    
-        // Log loaded data for debugging
-        console.log('Loaded Data:', savedData);
-        
-        // Set initial content in TinyMCE with the saved data
-        tinymce.init({
-            selector: '#editor',
-            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-            tinycomments_mode: 'embedded',
-            tinycomments_author: 'Author name',
-            mergetags_list: [
-                { value: 'First.Name', title: 'First Name' },
-                { value: 'Email', title: 'Email' },
-            ],
-            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
-            setup: function (editor) {
-                editor.on('init', function () {
-                    // Set initial content in TinyMCE
-                    editor.setContent(`
-                    <b> Draft of General Power of Attorney</b>
-                    <br>
-                    To All to Whom these presents shall come, I ${savedData.principleFullName || 'Not provided'} of ${savedData.principleAddress || 'Not provided'}
-                    WHEREAS, I am desirous of appointing some fit and proper person to look after all my immovable properties, business and other affairs and requested Mr. ${savedData.attorneyFullName || 'Not provided'} of ${savedData.attorneyAddress || 'Not provided'} (Hereinafter called 'the Attorney') to act for me and manage and look after my affairs which the Attorney has consented to do
-                    NOW KNOW YOU ALL AND THESE PRESENTS WITNESS that I, the said ${savedData.witnessFullName || 'Not provided'} do hereby appoint the said ${savedData.attorneyFullName || 'Not provided'} as my true and lawful Attorney with full power and authority to do and execute all acts, deeds, and things as hereinafter mentioned.
-                    <br>
-                    39. In general to do all other acts, deeds. Matters and things whatsoever in or about my estate, property and affairs or concur with persons jointly Interested with myself therein in doing all acts, deeds, matters and things herein either particularly or generally described as amply and effectually to all Intents and purpose as I could do in my own proper person if these presents had not been made.
-                    AND I, the abovenamed ${savedData.principleFullName || 'Not provided'} do hereby undertake to ratify whatever the Attorney or any substitute or agent appointed by him under the power In that behalf hereinbefore contained may lawfully do or cause to be done in and by virtue of these presents.
-                    IN WITNESS WHEREOF I, the abovenamed ${savedData.principleFullName || 'Not provided'} have hereunto set my hand this ${savedData.dateOfExecution || 'Not provided'} day of ${savedData.dateOfExecution || 'Not provided'}
-                    Signed, sealed and delivered by the withinnamed
-                    in the presence of ${savedData.witnessFullName || 'Not provided'}
-                     `);
-                });
-            }
-        });
-        
-        // Setup event listeners for saving data
-        document.getElementById('nextButton').addEventListener('click', saveStep2Data);
-    });
-    
-    // Function to save Step 2 data to sessionStorage
-    function saveStep2Data() {
-        const step2Data = {
-            principleFullName: document.getElementById('PrincipleFullName').value || 'Not provided',
-            principleAddress: document.getElementById('PrincipleAddress').value || 'Not provided',
-            attorneyFullName: document.getElementById('AttorneyFullName').value || 'Not provided',
-            attorneyAddress: document.getElementById('AttorneyAddress').value || 'Not provided',
-            witnessFullName: document.getElementById('WitnessFullName').value || 'Not provided',
-            witnessAddress: document.getElementById('WitnessAddress').value || 'Not provided',
-            dateOfExecution: document.getElementById('DateOfExecution').value || 'Not provided'
-        };
-        
-        sessionStorage.setItem('step2Data', JSON.stringify(step2Data));
-        console.log('Saved Data:', step2Data);
-    }
-    
-    // Function to load Step 2 data from sessionStorage
-    function loadStep2Data() {
-        const savedData = JSON.parse(sessionStorage.getItem('step2Data')) || {};
-        console.log('Loaded Data:', savedData);
-        
-        document.getElementById('PrincipleFullName').value = savedData.principleFullName || '';
-        document.getElementById('PrincipleAddress').value = savedData.principleAddress || '';
-        document.getElementById('AttorneyFullName').value = savedData.attorneyFullName || '';
-        document.getElementById('AttorneyAddress').value = savedData.attorneyAddress || '';
-        document.getElementById('WitnessFullName').value = savedData.witnessFullName || '';
-        document.getElementById('WitnessAddress').value = savedData.witnessAddress || '';
-        document.getElementById('DateOfExecution').value = savedData.dateOfExecution || '';
-    }
-    
-    </script>
-        <style>
+    <style>
         .hidden {
             display: none;
         }
@@ -167,7 +92,8 @@
                                                     </label>
                                                     <input type="text" name="principleFullName"
                                                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                        id="PrincipleFullName" value="John Doe" placeholder="Enter username" required>
+                                                        id="PrincipleFullName" 
+                                                        placeholder="Enter username" required>
                                                 </div>
                                             </div>
                                             <div class="w-full lg:w-6/12 px-4">
@@ -178,7 +104,8 @@
                                                     </label>
                                                     <input type="text" name="principleAddress"
                                                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                        id="PrincipleAddress" value="John Doe" placeholder="PrincipleAddress" required>
+                                                        id="PrincipleAddress" 
+                                                        placeholder="PrincipleAddress" required>
                                                 </div>
                                             </div>
                                             <div class="w-full lg:w-6/12 px-4">
@@ -189,7 +116,8 @@
                                                     </label>
                                                     <input type="text" name="attorneyFullName"
                                                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                        id="AttorneyFullName" value="John Doe" placeholder="First Name" required>
+                                                        id="AttorneyFullName"  placeholder="First Name"
+                                                        required>
                                                 </div>
                                             </div>
                                             <div class="w-full lg:w-6/12 px-4">
@@ -200,7 +128,8 @@
                                                     </label>
                                                     <input type="text" name="attorneyAddress"
                                                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                        id="AttorneyAddress" value="John Doe" placeholder="AttorneyAddress" required>
+                                                        id="AttorneyAddress" 
+                                                        placeholder="AttorneyAddress" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -219,7 +148,8 @@
                                                     </label>
                                                     <input type="text" name="witnessFullName"
                                                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                        id="WitnessFullName" value="John Doe" placeholder="WitnessFullName" required>
+                                                        id="WitnessFullName" 
+                                                        placeholder="WitnessFullName" required>
                                                 </div>
                                             </div>
                                             <div class="w-full lg:w-4/12 px-4">
@@ -230,7 +160,8 @@
                                                     </label>
                                                     <input type="text" name="witnessAddress"
                                                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                        id="WitnessAddress" value="John Doe" placeholder="address" required>
+                                                        id="WitnessAddress"  placeholder="address"
+                                                        required>
                                                 </div>
                                             </div>
                                             <div class="w-full lg:w-4/12 px-4">
@@ -241,7 +172,8 @@
                                                     </label>
                                                     <input type="date" name="dateOfExecution"
                                                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                        id="DateOfExecution" value="2024-08-17" placeholder="Date" required>
+                                                        id="DateOfExecution" placeholder="Date"
+                                                        required>
                                                 </div>
                                             </div>
                                         </div>
@@ -351,17 +283,6 @@
                                     <hr class="mt-6 border-b-1 border-blueGray-300">
                                     <div class="flex align-middle justify-between mt-4">
                                         <div id="editor">
-                                            <b> Draft of General Power of Attorney</b>
-                                            <br>
-                                            To All to Whom these presents shall come, I [PrincipleFullName] of [PrincipleAddress]
-                                            WHEREAS, I am desirous of appointing some fit and proper person to look after all my immovable properties, business and other affairs and requested Mr. [AttorneyFullName] of [AttorneyAddress] (Hereinafter called 'the Attorney') to act for me and manage and look after my affairs which the Attorney has consented to do
-                                            NOW KNOW YOU ALL AND THESE PRESENTS WITNESS that I, the said [WitnessFullName] do hereby appoint the said [AttorneyFullName] as my true and lawful Attorney with full power and authority to do and execute all acts, deeds, and things as hereinafter mentioned.
-                                            <br>
-                                            39. In general to do all other acts, deeds. Matters and things whatsoever in or about my estate, property and affairs or concur with persons jointly Interested with myself therein in doing all acts, deeds, matters and things herein either particularly or generally described as amply and effectually to all Intents and purpose as I could do in my own proper person if these presents had not been made.
-                                            AND I, the abovenamed [PrincipleFullName] do hereby undertake to ratify whatever the Attorney or any substitute or agent appointed by him under the power In that behalf hereinbefore contained may lawfully do or cause to be done in and by virtue of these presents.
-                                            IN WITNESS WHEREOF I, the abovenamed [PrincipleFullName] have hereunto set my hand this [AttorneyFullName] day of [DateOfExecution]
-                                            Signed, sealed and delivered by the withinnamed
-                                            in the presence of [WitnessFullName]
                                         </div>
                                     </div>
                                     <div class="flex align-middle justify-between mt-4">
@@ -385,6 +306,10 @@
         </section>
     </div>
 </body>
+
+<script>
+
+</script>
 <script src="js/corporate1.js"></script>
 
 </html>
